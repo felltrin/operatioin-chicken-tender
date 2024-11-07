@@ -1,30 +1,16 @@
-import { MongoClient } from "mongodb";
+import clientPromise from "@/lib/mongodb";
+import { NextApiRequest, NextApiResponse } from "next";
 
-let client: MongoClient;
-let clientPromise;
-
-// Ensure MongoClient is only initialized once
-if (!global._mongoClientPromise) {
-  client = new MongoClient(process.env.MONGODB_URI);
-  clientPromise = client
-    .connect()
-    .then(() => {
-      console.log("Connected to MongoDB");
-      return client;
-    })
-    .catch((error) => {
-      console.error("MongoDB connection failed:", error);
-    });
-  global._mongoClientPromise = clientPromise;
-} else {
-  clientPromise = global._mongoClientPromise;
-}
-
-export default async function handler(req, res) {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   const client = await clientPromise;
-  const db = client.db("your-database-name");
-  const data = await db.collection("your-collection").find({}).toArray();
+  const db = client.db("sample_mflix");
+  const data = await db
+    .collection("comments")
+    .find({})
+    .sort({ name: 1 })
+    .limit(3)
+    .toArray();
   res
     .status(200)
     .json({ message: "Connected to MongoDB and retrieved data", data });
-}
+};
