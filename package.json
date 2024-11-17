@@ -14,10 +14,9 @@
     "graphql": "^16.9.0",
     "graphql-scalars": "^1.23.0",
     "mongodb": "^6.10.0",
-    "nodemon": "^3.1.7",
     "react": "19.0.0-rc-02c0e824-20241028",
     "react-dom": "19.0.0-rc-02c0e824-20241028",
-    "next": "15.0.2"
+    "next": "^15.0.3"
   },
   "devDependencies": {
     "typescript": "^5",

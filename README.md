@@ -2,7 +2,8 @@
 
 ## TODO
 
-- [] Setup GraphQL
+- [x] Setup GraphQL
+- [x] figure out movie endpoint
 - [] set up api integration
 - [] develop backend
 - [] Develop frontend
