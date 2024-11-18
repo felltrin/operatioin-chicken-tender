@@ -2,11 +2,17 @@
   "version": "4",
   "specifiers": {
     "npm:@apollo/server@^4.11.2": "4.11.2_graphql@16.9.0",
+    "npm:@types/body-parser@^1.19.5": "1.19.5",
+    "npm:@types/cors@^2.8.17": "2.8.17",
+    "npm:@types/express@5": "5.0.0",
     "npm:@types/node@20": "20.17.6",
     "npm:@types/react-dom@18": "18.3.1",
     "npm:@types/react@18": "18.3.12",
+    "npm:body-parser@^1.20.3": "1.20.3",
+    "npm:cors@^2.8.5": "2.8.5",
     "npm:eslint-config-next@15.0.2": "15.0.2_eslint@8.57.1_typescript@5.6.3_@typescript-eslint+parser@8.13.0__eslint@8.57.1__typescript@5.6.3_eslint-plugin-import@2.31.0__eslint@8.57.1",
     "npm:eslint@8": "8.57.1",
+    "npm:express@^4.21.1": "4.21.1",
     "npm:graphql-scalars@^1.23.0": "1.23.0_graphql@16.9.0",
     "npm:graphql@^16.9.0": "16.9.0",
     "npm:mongodb@^6.10.0": "6.10.0",
@@ -68,8 +74,8 @@
         "@apollo/utils.usagereporting",
         "@apollo/utils.withrequired",
         "@graphql-tools/schema",
-        "@types/express",
-        "@types/express-serve-static-core",
+        "@types/express@4.17.21",
+        "@types/express-serve-static-core@4.19.6",
         "@types/node-fetch",
         "async-retry",
         "cors",
@@ -481,8 +487,23 @@
         "@types/node@22.5.4"
       ]
     },
+    "@types/cors@2.8.17": {
+      "integrity": "sha512-8CGDvrBj1zgo2qE+oS3pOCyYNqCPryMWY2bGfwA0dcfopWGgxs+78df0Rs3rc9THP4JkOhLsAa+15VdpAqkcUA==",
+      "dependencies": [
+        "@types/node@22.5.4"
+      ]
+    },
     "@types/express-serve-static-core@4.19.6": {
       "integrity": "sha512-N4LZ2xG7DatVqhCZzOGb1Yi5lMbXSZcmdLDe9EzSndPV2HpWYWzRbaerl2n27irrm94EPpprqa8KpskPT085+A==",
+      "dependencies": [
+        "@types/node@22.5.4",
+        "@types/qs",
+        "@types/range-parser",
+        "@types/send"
+      ]
+    },
+    "@types/express-serve-static-core@5.0.1": {
+      "integrity": "sha512-CRICJIl0N5cXDONAdlTv5ShATZ4HEwk6kDDIW2/w9qOWKg+NU/5F8wYRWCrONad0/UKkloNSmmyN/wX4rtpbVA==",
       "dependencies": [
         "@types/node@22.5.4",
         "@types/qs",
@@ -494,7 +515,16 @@
       "integrity": "sha512-ejlPM315qwLpaQlQDTjPdsUFSc6ZsP4AN6AlWnogPjQ7CVi7PYF3YVz+CY3jE2pwYf7E/7HlDAN0rV2GxTG0HQ==",
       "dependencies": [
         "@types/body-parser",
-        "@types/express-serve-static-core",
+        "@types/express-serve-static-core@4.19.6",
+        "@types/qs",
+        "@types/serve-static"
+      ]
+    },
+    "@types/express@5.0.0": {
+      "integrity": "sha512-DvZriSMehGHL1ZNLzi6MidnsDhUZM/x2pRdDIKdwbUNqqwHxMlRdkxtn6/EPKyqKpHqTl/4nRZsRNLpZxZRpPQ==",
+      "dependencies": [
+        "@types/body-parser",
+        "@types/express-serve-static-core@5.0.1",
         "@types/qs",
         "@types/serve-static"
       ]
@@ -3069,11 +3099,17 @@
     "packageJson": {
       "dependencies": [
         "npm:@apollo/server@^4.11.2",
+        "npm:@types/body-parser@^1.19.5",
+        "npm:@types/cors@^2.8.17",
+        "npm:@types/express@5",
         "npm:@types/node@20",
         "npm:@types/react-dom@18",
         "npm:@types/react@18",
+        "npm:body-parser@^1.20.3",
+        "npm:cors@^2.8.5",
         "npm:eslint-config-next@15.0.2",
         "npm:eslint@8",
+        "npm:express@^4.21.1",
         "npm:graphql-scalars@^1.23.0",
         "npm:graphql@^16.9.0",
         "npm:mongodb@^6.10.0",
