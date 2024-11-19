@@ -4,7 +4,7 @@
 
 - [x] Setup GraphQL
 - [x] figure out movie endpoint
-- [] set up api integration
+- [x] set up api integration
 - [] develop backend
 - [] Develop frontend
 - [] test and optimize

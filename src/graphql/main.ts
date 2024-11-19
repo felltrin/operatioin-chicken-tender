@@ -1,5 +1,4 @@
 import { ApolloServer } from "@apollo/server";
-// import { startStandaloneServer } from "@apollo/server/standalone";
 import express from "express";
 import { expressMiddleware } from "@apollo/server/express4";
 import cors from "cors";
@@ -31,7 +30,7 @@ async function startServer() {
     res.status(200).send("OK");
   });
 
-  app.use((err, req, res, next) => {
+  app.use((err: any, req: any, res: any, next: any) => {
     console.error(err.stack);
     res.status(500).send("Something broke!");
   });
@@ -45,9 +44,3 @@ async function startServer() {
 startServer().catch((error) => {
   console.error("Failed to start the server:", error);
 });
-
-// const { url } = await startStandaloneServer(server, {
-//   listen: { port: 4000 },
-// });
-
-// console.log(`🚀 Server ready at url ${url}`);
