@@ -5,7 +5,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   return new Promise(async (resolve, reject) => {
     try {
       const client = await clientPromise;
-      const db = client.db("sample_mflix");
+      const db = client.db("give_me_loot");
       const movies = await db
         .collection("users")
         .find({})
