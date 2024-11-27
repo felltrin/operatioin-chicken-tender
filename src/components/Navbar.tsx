@@ -2,7 +2,7 @@
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 
-export default function Dashboard() {
+export default function Navbar() {
   const { data: session } = useSession();
 
   const handleLogout = () => {
@@ -13,10 +13,12 @@ export default function Dashboard() {
   };
 
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <p>Welcome, {session?.user?.name}</p>
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+    <nav>
+      {session ? (
+        <button onClick={handleLogout}>Logout</button>
+      ) : (
+        <link to="/login">Login</link>
+      )}
+    </nav>
   );
 }
