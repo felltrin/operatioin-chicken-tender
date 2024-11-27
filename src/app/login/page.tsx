@@ -1,59 +1,62 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
   const router = useRouter();
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+      const result = await signIn("credentials", {
+        redirect: false,
+        email: credentials.email,
+        password: credentials.password,
       });
 
-      if (res.ok) {
-        // Redirect to dashboard after successful login
+      if (result?.error) {
+        alert("Login failed: " + result.error);
+      } else {
         router.push("/dashboard");
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Login error:", error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-sm mx-auto mt-10">
-      <div className="mb-4">
-        <label className="block mb-2">Email:</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-2 border rounded"
-          required
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block mb-2">Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-2 border rounded"
-          required
-        />
-      </div>
-      <button
-        type="submit"
-        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
-      >
-        Login
-      </button>
+    <form onSubmit={handleLogin}>
+      <input
+        type="email"
+        value={credentials.email}
+        onChange={(e) =>
+          setCredentials({
+            ...credentials,
+            email: e.target.value,
+          })
+        }
+        placeholder="Email"
+        required
+      />
+      <input
+        type="password"
+        value={credentials.password}
+        onChange={(e) =>
+          setCredentials({
+            ...credentials,
+            password: e.target.value,
+          })
+        }
+        placeholder="Password"
+        required
+      />
+      <button type="submit">Login</button>
     </form>
   );
 }
