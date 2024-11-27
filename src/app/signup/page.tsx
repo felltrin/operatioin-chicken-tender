@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
@@ -14,7 +15,7 @@ export default function SignUp() {
       const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, email, password }),
       });
 
       if (res.ok) {
@@ -27,6 +28,16 @@ export default function SignUp() {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-sm mx-auto mt-10">
+      <div className="mb-4">
+        <label className="block mb-2">Username:</label>
+        <input
+          type="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="w-full p-2 border rounded"
+          required
+        />
+      </div>
       <div className="mb-4">
         <label className="block mb-2">Email:</label>
         <input

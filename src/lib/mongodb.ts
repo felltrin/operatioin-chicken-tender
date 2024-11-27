@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, Db } from "mongodb";
 
 if (!process.env.MONGODB_URI) {
   throw new Error('Invalid/Missing environment variable: "MONGODB_URI"');
@@ -8,6 +8,15 @@ const uri = process.env.MONGODB_URI;
 const options = { appName: "devrel.template.nextjs" };
 
 let client: MongoClient;
+
+// Export connectToDatabase function
+export async function connectToDatabase(): Promise<Db> {
+  if (!client) {
+    client = new MongoClient(uri, options);
+    await client.connect();
+  }
+  return client.db(process.env.MONGODB_DB);
+}
 
 if (process.env.NODE_ENV === "development") {
   // In development mode, use a global variable so that the value
