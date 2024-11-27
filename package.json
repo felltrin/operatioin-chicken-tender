@@ -21,6 +21,7 @@
     "graphql-scalars": "^1.23.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.10.0",
+    "next-auth": "^4.24.10",
     "react": "19.0.0-rc-02c0e824-20241028",
     "react-dom": "19.0.0-rc-02c0e824-20241028",
     "next": "^15.0.3"
