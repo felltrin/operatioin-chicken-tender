@@ -1,7 +1,29 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from "bcryptjs";
 import { connectToDatabase } from "../../../lib/mongodb";
-import User from "../../../models/User";
+
+// Server-side validation function
+function validatePassword(password: string): string[] {
+  const errors: string[] = [];
+
+  if (password.length < 8) {
+    errors.push("Password must be at least 8 characters long");
+  }
+  if (!/[A-Z]/.test(password)) {
+    errors.push("Password must contain at least one uppercase letter");
+  }
+  if (!/[a-z]/.test(password)) {
+    errors.push("Password must contain at least one lowercase letter");
+  }
+  if (!/[0-9]/.test(password)) {
+    errors.push("Password must contain at least one number");
+  }
+  if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+    errors.push("Password must contain at least one special character");
+  }
+
+  return errors;
+}
 
 export default async function handler(
   req: NextApiRequest,
@@ -14,9 +36,24 @@ export default async function handler(
   try {
     const { username, email, password } = req.body;
 
-    // Validate input
+    // Validate input presence
     if (!username || !email || !password) {
       return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    // Server-side email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ message: "Invalid email address" });
+    }
+
+    // Server-side password validation
+    const passwordValidationErrors = validatePassword(password);
+    if (passwordValidationErrors.length > 0) {
+      return res.status(400).json({
+        message: "Password validation failed",
+        errors: passwordValidationErrors,
+      });
     }
 
     // Connect to database
