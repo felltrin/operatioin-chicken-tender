@@ -88,6 +88,9 @@ export const authOptions: AuthOptions = {
   // Callbacks for additional customization
   callbacks: {
     async session({ session, token }) {
+      if (token.sub) {
+        session.user.id = token.sub;
+      }
       // Add username to session
       if (token.username) {
         session.user.username = token.username as string;
@@ -98,6 +101,7 @@ export const authOptions: AuthOptions = {
       // Add username to token
       if (user) {
         token.username = user.username;
+        token.sub = user.id;
       }
       return token;
     },
