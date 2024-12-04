@@ -5,6 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import clientPromise from "../../../lib/mongodb";
 import bcrypt from "bcryptjs";
 import { MongoClient } from "mongodb";
+import { validateLoginInput } from "@/lib/validation";
 
 // Import your User model (adjust path as needed)
 import User from "../../../models/User";
@@ -26,8 +27,18 @@ export const authOptions: AuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials?.username && !credentials?.email) {
-          throw new Error("Username or email is required");
+        // Input validation
+        if (!credentials?.password && !credentials?.email) {
+          throw new Error("Password and email is required");
+        }
+
+        const validattionResult = validateLoginInput(
+          credentials.email,
+          credentials.password
+        );
+
+        if (!validattionResult.isValid) {
+          throw new Error(JSON.stringify(validattionResult.errors));
         }
 
         try {
@@ -48,11 +59,11 @@ export const authOptions: AuthOptions = {
           // Verify password
           const isValid = await bcrypt.compare(
             credentials.password!,
-            user.password,
+            user.password
           );
 
           if (!isValid) {
-            throw new Error("Invalid credentials");
+            throw new Error("Invalid password");
           }
 
           // Return user object for session
