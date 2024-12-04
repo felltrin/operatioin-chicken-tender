@@ -47,8 +47,7 @@ export default function Login() {
                 setCredentials({
                   ...credentials,
                   email: e.target.value,
-                })
-              }
+                })}
               placeholder="Email"
               required
               className="w-full px-3 py-2 border rounded"
@@ -66,8 +65,7 @@ export default function Login() {
                 setCredentials({
                   ...credentials,
                   password: e.target.value,
-                })
-              }
+                })}
               className="w-full px-3 py-2 border rounded"
               placeholder="Password"
               required
