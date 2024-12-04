@@ -8,10 +8,35 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+  });
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    setErrors({
+      email: "",
+      password: "",
+    });
+
+    // validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!credentials.email || !emailRegex.test(credentials.email)) {
+      setErrors((prev) => ({ ...prev, email: "Invalid email address" }));
+      return;
+    }
+
+    // validate password
+    if (!credentials.password) {
+      setErrors((prev) => ({
+        ...prev,
+        password: "Please enter in a password",
+      }));
+      return;
+    }
 
     try {
       const result = await signIn("credentials", {
@@ -50,9 +75,11 @@ export default function Login() {
                 })
               }
               placeholder="Email"
-              required
               className="w-full px-3 py-2 border rounded"
             />
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+            )}
           </div>
 
           <div className="mb-4">
@@ -70,8 +97,10 @@ export default function Login() {
               }
               className="w-full px-3 py-2 border rounded"
               placeholder="Password"
-              required
             />
+            {errors.password && (
+              <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+            )}
           </div>
 
           <button

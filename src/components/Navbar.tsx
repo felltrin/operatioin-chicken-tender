@@ -14,11 +14,9 @@ export default function Navbar() {
 
   return (
     <nav>
-      {session ? (
-        <button onClick={handleLogout}>Logout</button>
-      ) : (
-        <link to="/login">Login</link>
-      )}
+      {session
+        ? <button onClick={handleLogout}>Logout</button>
+        : <link to="/login">Login</link>}
     </nav>
   );
 }
