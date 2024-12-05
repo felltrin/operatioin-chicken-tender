@@ -25,14 +25,13 @@ export default function Dashboard() {
 
   return (
     <>
-      <Sidebar></Sidebar>
-      <div>
+      <Sidebar>
         <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
         <p>
           Welcome, {session?.user?.username || session?.user?.email || "user"}
         </p>
         {/* <button onClick={handleLogout}>Logout</button> */}
-      </div>
+      </Sidebar>
     </>
   );
 }

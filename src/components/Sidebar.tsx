@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
+// import LogoutButton from "./LogoutButton";
 import {
   Home,
   Settings,
@@ -11,11 +12,13 @@ import {
 interface SidebarProps {
   initialCollapsed?: boolean;
   onLogout?: () => void;
+  children: ReactNode;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
   initialCollapsed = false,
   onLogout,
+  children,
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(initialCollapsed);
 
@@ -26,21 +29,21 @@ const Sidebar: React.FC<SidebarProps> = ({
   ];
 
   return (
-    <div
-      className={`
-        h-screen 
+    <div className="flex h-screen">
+      <div
+        className={`
         bg-gray-800 
         text-white 
         transition-all 
         duration-300 
         ${isCollapsed ? "w-20" : "w-64"}
       `}
-    >
-      <div className="flex flex-col h-full">
-        {/* Collapse/Expand Button */}
-        <button
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          className="
+      >
+        <div className="flex flex-col h-full">
+          {/* Collapse/Expand Button */}
+          <button
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            className="
             p-2 
             m-4 
             bg-gray-700 
@@ -50,17 +53,17 @@ const Sidebar: React.FC<SidebarProps> = ({
             transition
             duration-200
           "
-        >
-          {isCollapsed ? <ChevronRight /> : <ChevronLeft />}
-        </button>
+          >
+            {isCollapsed ? <ChevronRight /> : <ChevronLeft />}
+          </button>
 
-        {/* Menu Items */}
-        <nav className="flex-grow">
-          {menuItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="
+          {/* Menu Items */}
+          <nav className="flex-grow">
+            {menuItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="
                 flex 
                 items-center 
                 p-3 
@@ -68,18 +71,18 @@ const Sidebar: React.FC<SidebarProps> = ({
                 transition 
                 duration-200
               "
-            >
-              <item.icon className="mr-3" />
-              {!isCollapsed && <span>{item.label}</span>}
-            </a>
-          ))}
-        </nav>
+              >
+                <item.icon className="mr-3" />
+                {!isCollapsed && <span>{item.label}</span>}
+              </a>
+            ))}
+          </nav>
 
-        {/* Logout Button */}
-        <div className="p-4">
-          <button
-            onClick={onLogout}
-            className="
+          {/* Logout Button */}
+          <div className="p-4">
+            <button
+              onClick={onLogout}
+              className="
               w-full 
               flex 
               items-center 
@@ -91,12 +94,14 @@ const Sidebar: React.FC<SidebarProps> = ({
               transition 
               duration-200
             "
-          >
-            <LogOut className="mr-3" />
-            {!isCollapsed && <span>Logout</span>}
-          </button>
+            >
+              <LogOut className="mr-3" />
+              {!isCollapsed && <span>Logout</span>}
+            </button>
+          </div>
         </div>
       </div>
+      <div className="flex-grow bg-gray-100 p-4 overflow-auto">{children}</div>
     </div>
   );
 };
