@@ -1,5 +1,4 @@
 import React, { ReactNode, useState } from "react";
-// import LogoutButton from "./LogoutButton";
 import {
   Home,
   Settings,
@@ -8,16 +7,22 @@ import {
   ChevronRight,
   LogOut,
 } from "lucide-react";
+import { signOut } from "next-auth/react";
 
 interface SidebarProps {
   initialCollapsed?: boolean;
-  onLogout?: () => void;
   children: ReactNode;
 }
 
+const handleLogout = () => {
+  signOut({
+    redirect: true,
+    callbackUrl: "/login",
+  });
+};
+
 const Sidebar: React.FC<SidebarProps> = ({
   initialCollapsed = false,
-  onLogout,
   children,
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(initialCollapsed);
@@ -81,7 +86,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           {/* Logout Button */}
           <div className="p-4">
             <button
-              onClick={onLogout}
+              onClick={handleLogout}
               className="
               w-full 
               flex 
