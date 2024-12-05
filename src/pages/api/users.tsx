@@ -5,14 +5,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   return new Promise(async (resolve, reject) => {
     try {
       const client = await clientPromise;
-      const db = client.db("give_me_loot");
-      const movies = await db
+      // const db = client.db("give_me_loot");
+      const db = client.db("test");
+      const users = await db
         .collection("users")
         .find({})
         .sort({ id: -1 })
         .limit(10)
         .toArray();
-      res.json(movies);
+      res.json(users);
     } catch (e) {
       console.error(e);
     }
