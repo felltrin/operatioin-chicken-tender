@@ -1,7 +1,8 @@
 "use client";
-import { signOut } from "next-auth/react";
+// import { signOut } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
+import Sidebar from "@/components/Sidebar";
 
 export default function Dashboard() {
   const { data: session, status } = useSession({
@@ -15,20 +16,14 @@ export default function Dashboard() {
     return <p>Loading...</p>;
   }
 
-  const handleLogout = () => {
-    signOut({
-      redirect: true, // Redirects to sign-in page
-      callbackUrl: "/login",
-    });
-  };
-
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
-      <p>
-        Welcome, {session?.user?.username || session?.user?.email || "user"}
-      </p>
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+    <>
+      <Sidebar>
+        <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
+        <p>
+          Welcome, {session?.user?.username || session?.user?.email || "user"}
+        </p>
+      </Sidebar>
+    </>
   );
 }
