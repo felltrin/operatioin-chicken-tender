@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function SignupForm() {
   const [formData, setFormData] = useState({
@@ -109,6 +110,17 @@ export default function SignupForm() {
     }
   };
 
+  const LoginLink = () => (
+    <div className="mt-4 text-center">
+      <p>
+        Already have an account?{" "}
+        <Link href="/login" className="text-blue-500 hover:underline">
+          Login Here
+        </Link>
+      </p>
+    </div>
+  );
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
@@ -123,7 +135,8 @@ export default function SignupForm() {
               id="username"
               value={formData.username}
               onChange={(e) =>
-                setFormData({ ...formData, username: e.target.value })}
+                setFormData({ ...formData, username: e.target.value })
+              }
               className="w-full px-3 py-2 border rounded"
             />
             {errors.username && (
@@ -140,7 +153,8 @@ export default function SignupForm() {
               id="email"
               value={formData.email}
               onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })}
+                setFormData({ ...formData, email: e.target.value })
+              }
               className="w-full px-3 py-2 border rounded"
             />
             {errors.email && (
@@ -157,7 +171,8 @@ export default function SignupForm() {
               id="password"
               value={formData.password}
               onChange={(e) =>
-                setFormData({ ...formData, password: e.target.value })}
+                setFormData({ ...formData, password: e.target.value })
+              }
               className="w-full px-3 py-2 border rounded"
             />
             {errors.password && (
@@ -174,7 +189,8 @@ export default function SignupForm() {
               id="confirmPassword"
               value={formData.confirmPassword}
               onChange={(e) =>
-                setFormData({ ...formData, confirmPassword: e.target.value })}
+                setFormData({ ...formData, confirmPassword: e.target.value })
+              }
               className="w-full px-3 py-2 border rounded"
             />
             {errors.confirmPassword && (
@@ -191,6 +207,8 @@ export default function SignupForm() {
             Sign Up
           </button>
         </form>
+
+        <LoginLink />
       </div>
     </div>
   );
