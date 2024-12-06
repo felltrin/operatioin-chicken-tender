@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 export default function Login() {
   const [credentials, setCredentials] = useState({
@@ -54,6 +55,17 @@ export default function Login() {
       console.error("Login error:", error);
     }
   };
+
+  const RegistrationLink = () => (
+    <div className="mt-4 text-center">
+      <p>
+        Don't have an account?{" "}
+        <Link href="/signup" className="text-blue-500 hover:underline">
+          Register Here
+        </Link>
+      </p>
+    </div>
+  );
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -110,6 +122,8 @@ export default function Login() {
             Login
           </button>
         </form>
+
+        <RegistrationLink />
       </div>
     </div>
   );
