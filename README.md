@@ -5,7 +5,12 @@
 - [x] Setup GraphQL
 - [x] figure out movie endpoint
 - [x] set up api integration
-- [] develop backend
+- [] user authentication
+- [] design graphql schema
+- [] set up mongodb collections
+- [] implement backend resolvers
 - [] Develop frontend
-- [] test and optimize
+- [] integrate state management
+- [] test api and ui
+- [] polish and add enhancements
 - [] deploy and monitor
