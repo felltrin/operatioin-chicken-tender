@@ -8,7 +8,7 @@ import { MongoClient } from "mongodb";
 import { validateLoginInput } from "@/lib/validation";
 
 // Import your User model (adjust path as needed)
-import User from "../../../models/User";
+// import User from "../../../models/User";
 
 // Connect to MongoDB (you'll need to create this file)
 async function connectToDatabase() {

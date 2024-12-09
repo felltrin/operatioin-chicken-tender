@@ -16,5 +16,13 @@ export const resolvers = {
       const users = await response.json();
       return users.find((user: any) => user._id === id);
     },
+    userByEmail: async (_: any, { email }: { email: string }) => {
+      const response = await fetch(`http://localhost:3000/api/users`);
+      if (response.status === 404) {
+        throw new Error("Users not found");
+      }
+      const users = await response.json();
+      return users.find((user: any) => user.email === email);
+    },
   },
 };
